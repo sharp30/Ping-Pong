@@ -1,4 +1,4 @@
-def Ball():
+class Ball:
     def __init__(self):
         self.loc = [10,10]
         self.direction = [0 ]#random something
