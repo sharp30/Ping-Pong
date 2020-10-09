@@ -1,15 +1,19 @@
 import config
+import threading 
+
 SIDES = {True : ['i','l'],False : ['w','l']}
+
 class Player:
-    PLAYER_SIZE = 5
     sign = '8'
     def __init__(self,player_side):
         self.loc = [0,0]
-        self.len = PLAYER_SIZE
+        self.len = config.PLAYER_SIZE
         self.side = player_side #right or left
+        self.th = threading.Thread(target=self.move, args=())   
+        self.stopped = False
 
     def move(self):
-        while(True):
+        while(not self.stopped):
             #TODO: on key and not input
             inp = input()
             while(inp not in SIDES[self.side]):
@@ -25,8 +29,13 @@ class Player:
     
     #is player in location - return player's sign
     def is_here(self,loc):
-        options = [[loc[0],loc[1] + i] for i in range(Player.PLAYER_SIZE)]
+        options = [[self.loc[0] +i,self.loc[1]] for i in range(config.PLAYER_SIZE)]
         return Player.sign if loc in options else None
 
-
+    def start_thread(self):
+        self.th.start()
+        return self.th
+    
+    def kill_thread(self):
+        self.stopped = True
     

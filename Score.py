@@ -15,4 +15,4 @@ class Score:
         return [left,right]
     
     def is_over(self):
-        return left == config.MAX_POINT or right == config.MAX_POINT    
+        return self.left == config.MAX_POINT or self.right == config.MAX_POINT    
