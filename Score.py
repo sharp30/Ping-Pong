@@ -1,3 +1,4 @@
+import config
 class Score:
     def __init__(self):
         self.left = 0
@@ -13,3 +14,5 @@ class Score:
     def get_score(self):
         return [left,right]
     
+    def is_over(self):
+        return left == config.MAX_POINT or right == config.MAX_POINT    
