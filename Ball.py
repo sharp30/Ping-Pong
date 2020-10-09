@@ -19,9 +19,14 @@ class Ball:
     def move(self):
         #check if some thing was hit
         #check if there was a goal
-        x =  self.loc[0] + self.speed
-        y =  self.direction[0] * x + self.direction[1]
-        self.loc = [x,y]
+        while not is_won(self):
+            if is_hit():
+                hit()
+            else:
+                x =  self.loc[0] + self.speed
+                y =  self.direction[0] * x + self.direction[1]
+            self.loc = [x,y]
+            #TODO:wait for a moment
 
     def is_here(self,location):
         return Ball.sign if self.loc == location else None 

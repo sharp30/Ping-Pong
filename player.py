@@ -1,4 +1,5 @@
-
+import config
+SIDES = {True : ['i','l'],False : ['w','l']}
 class Player:
     PLAYER_SIZE = 5
     sign = '8'
@@ -9,9 +10,18 @@ class Player:
 
     def move(self):
         while(True):
-            #get input  
-            #set location
-            pass
+            #TODO: on key and not input
+            inp = input()
+            while(inp not in SIDES[self.side]):
+                inp = input()
+            if SIDES[self.side][0] == inp:
+                if not self.loc[0] +5 > config.GAME_SIZE[0]:
+                    self.loc[0] +=1
+            else:
+                if not self.loc[0] ==0:
+                    self.loc[0] -=1
+            
+
     
     #is player in location - return player's sign
     def is_here(self,loc):
