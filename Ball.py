@@ -1,4 +1,5 @@
 class Ball:
+    sign = '0'
     def __init__(self):
         self.loc = [10,10]
         self.direction = [0 ]#random something
@@ -21,4 +22,7 @@ class Ball:
         x =  self.loc[0] + self.speed
         y =  self.direction[0] * x + self.direction[1]
         self.loc = [x,y]
+
+    def is_here(self,location):
+        return Ball.sign if self.loc == location else None 
 
