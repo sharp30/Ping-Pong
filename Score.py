@@ -12,6 +12,7 @@ class Score:
         else:
             self.left += 1
             print("Left ++")
+        
     #return list of score
     def get_score(self):
         return [left,right]

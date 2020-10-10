@@ -23,28 +23,25 @@ def init_all(score):
 def update_screen(score,parts):
     system("cls")
     output = """"""
-    #print(config.DIGITS[score.left],config.DIGITS[score.right])
-    print(" "*50 +  "%d - %d\n"%(score.left,score.right))
+    #print(config.DIGITS[score.left],config.DIGITS[score.right]) //TODO: fix this printing
+    print(" "*(config.GAME_SIZE[1]//2) + "%d - %d\n"%(score.left,score.right))
     output += '-'*config.GAME_SIZE[1] +"\n"
+    
     for row in range(config.GAME_SIZE[0]):
         for col in range(config.GAME_SIZE[1]):
-            
             found = False
             for i in parts:
                 ch = i.is_here([row,col])
                 if ch is not None:
-                    #print(ch,end = "")
                     output += ch
                     found = True
                     break
+                
             if not found:
                 if col == 0 or col == config.GAME_SIZE[1] - 1:
-                    #print("| ", end = "")
                     output+="|"
                 else:
-                    #print("", end = " ")
                     output += " "
-        #print()
         output += "\n"
     output += '-'*config.GAME_SIZE[1]
 
@@ -66,9 +63,6 @@ def main():
         update_screen(score,parts)
         parts[0].kill_thread()
         parts[1].kill_thread()
-
-
-
 
 
 
