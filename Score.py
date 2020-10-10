@@ -8,8 +8,10 @@ class Score:
     def inc_score(self,side):
         if side:
             self.right += 1
+            print("Right ++")
         else:
             self.left += 1
+            print("Left ++")
     #return list of score
     def get_score(self):
         return [left,right]

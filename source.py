@@ -52,17 +52,18 @@ def main():
         parts,threads= init_all(score)
         score_was_changed = False
         while threads[2].isAlive():#while the score is not changed
-            stop = datetime.datetime.now() + datetime.timedelta(seconds = 2)                 
+            stop = datetime.datetime.now() + datetime.timedelta(seconds = 1)                 
             
             while(datetime.datetime.now() < stop):
                 pass
             
-            
             update_screen(score,parts)
-        score.inc_score(parts[2].loc != 0)
+        score.inc_score(parts[2].loc[1] == 0)
         update_screen(score,parts)
         parts[0].kill_thread()
         parts[1].kill_thread()
+
+
 
 
 
