@@ -22,29 +22,33 @@ def init_all(score):
 #update screen terminal
 def update_screen(score,parts):
     system("cls")
-    print(config.DIGITS[score.left],config.DIGITS[score.right])
-    for x in range(config.GAME_SIZE[0]):
-        for y in range(config.GAME_SIZE[1]):
-            if x == 0 or x == config.GAME_SIZE[0] - 1:
-                print("-", end = "")
-                continue
+    output = """"""
+    #print(config.DIGITS[score.left],config.DIGITS[score.right])
+    print(" "*50 +  "%d - %d\n"%(score.left,score.right))
+    output += '-'*config.GAME_SIZE[1] +"\n"
+    for row in range(config.GAME_SIZE[0]):
+        for col in range(config.GAME_SIZE[1]):
             
             found = False
             for i in parts:
-                ch = i.is_here([x,y])
+                ch = i.is_here([row,col])
                 if ch is not None:
-                    print(ch,end = "")
+                    #print(ch,end = "")
+                    output += ch
                     found = True
                     break
+            if not found:
+                if col == 0 or col == config.GAME_SIZE[1] - 1:
+                    #print("| ", end = "")
+                    output+="|"
+                else:
+                    #print("", end = " ")
+                    output += " "
+        #print()
+        output += "\n"
+    output += '-'*config.GAME_SIZE[1]
 
-            if not found and (y == 0 or y == config.GAME_SIZE[1] - 1):
-                print("| ", end = "")
-            else:
-                print("", end = " ")
-
-        print()
-    
-            
+    print(output)
 
 def main():
     score = Score.Score()
@@ -52,7 +56,7 @@ def main():
         parts,threads= init_all(score)
         score_was_changed = False
         while threads[2].isAlive():#while the score is not changed
-            stop = datetime.datetime.now() + datetime.timedelta(seconds = 1)                 
+            stop = datetime.datetime.now() + datetime.timedelta(seconds = config.GAME_DELAY)                 
             
             while(datetime.datetime.now() < stop):
                 pass

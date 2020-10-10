@@ -5,7 +5,7 @@ import random
 class Ball:
     sign = '0'
     def __init__(self,players):
-        self.loc = [10,30]
+        self.loc = [config.GAME_SIZE[0]//2,config.GAME_SIZE[1]//2]
         self.direction = [random.choice(range(5)),self.loc[0]]#random something
         self.speed = random.choice([-1,1])
         self.players = players   
@@ -28,10 +28,10 @@ class Ball:
         while not ( self.loc[1] == 0 or self.loc[1] == config.GAME_SIZE[1]-1) or self.is_hit(): # while not making point
             if self.is_hit() and not cond:
                 self.hit()
-                print(self.loc,"hitted")
                 
             cond = False
-            col = self.loc[1] + self.speed
+
+            col = self.loc[1] + self.speed if self.direction[0] != 0 else 2*self.speed
             row = self.direction[0] *col + self.direction[1]
             if row >= 0 and col >=0 and row <= config.GAME_SIZE[0] and col <= config.GAME_SIZE[1]:
                 self.loc = [int(row),int(col)]
@@ -39,7 +39,7 @@ class Ball:
                 self.hit()
                 cond = True
                 
-            time.sleep(0.2)
+            time.sleep(0.15)
 
             #TODO:wait for a
 
